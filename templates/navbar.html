@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img class="img-responsive" id="logo" alt="" src="{% static 'img/bookstore.gif' %}"/></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'registration_register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'library' %}">Library</a></li>
+      </ul>
+
+      {% url 'auth_login' as login_page %}
+      {% if not request.user.is_authenticated and login_page not in request.get_full_path %}
+      <ul class="nav navbar-nav navbar-right">
+        <form class="navbar-form navbar-right" method="POST" action="{% url 'auth_login' %}">{% csrf_token %}
+          <div class="form-group">
+            <input class="form-control" name="username" placeholder="username" type="text" />
+          </div>
+          <div class="form-group">
+            <input class="form-control" name="password" placeholder="password" type="password" />
+          </div>
+          <button class="btn btn-default" type="submit">Login</button>
+        </form>
+      </ul>
+      {% endif %}
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>

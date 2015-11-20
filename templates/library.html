@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% block head_title %}
+Welcome to my own django app!
+{% endblock %}
+
+<div class="content">
+{% for book in books %}
+<table class="table">
+  <tr>
+    <td>{{book.title}}</td>
+    <td>{{book.author}}</td>
+  </tr>
+</table>
+{% empty %}
+<div class="lead">
+    There are no books yet!
+</div>
+
+</div>
+{% endfor %}
+{% endblock %}

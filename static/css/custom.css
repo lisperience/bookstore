@@ -1,0 +1,13 @@
+.text-align-center {
+  text-align: center;
+}
+
+#logo {
+  max-height: 25px;
+}
+
+#book_rental {
+  height: 300px;
+  width: 500px;
+  /* display: none; */
+}

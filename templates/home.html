@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block head_title %}
+Welcome to Bookstore book rental service!
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block jumbotron %}
+<!-- Main component for a primary marketing message or call to action -->
+
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Book Store</h1>
+      <h2 class="lead">Manage your book collection easily.</h2>
+      <p> <a class="btn btn-lg btn-primary" href="{% url 'library' %}" role="button">Go to your library!</a>
+      </p>
+    </div>
+    <!--     <div class="col-md-6" style="min-height: 300px; background-color: black"></div> -->
+    <img id="book_rental" alt="Book rental" src="{% static 'img/video.jpg' %}"/>
+  </div>
+</div> <!-- /jumbotron -->
+{% endblock %}
+
+{% block content %}
+
+{% if queryset %}
+<div class="table-responsive">
+  <table class="table">
+    {% for i in queryset %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.full_name }}</td>
+      <td>{{ i.email }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>{% else %}
+<div class="row">
+
+  <div class="col-xs-3">
+    <p class="lead text-align-center"> Built with Django & Bootstrap </p>
+  </div>
+
+  <div class="col-xs-3">
+    <p class="lead text-align-center">Created for starters of all kinds </p>
+  </div>
+
+  <div class="col-xs-3">
+    <p class="lead text-align-center">Always Open Source</p>
+  </div>
+
+  <div class="col-xs-3 pull-right">
+    <p class="lead text-align-center">{{ title }}</p>
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{ form  | crispy }}
+      <input class="btn btn-primary btn-block" type="submit" value="signup"/>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
