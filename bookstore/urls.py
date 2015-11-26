@@ -1,6 +1,6 @@
-from django.conf import settings
-from django.conf.urls import patterns, include, url
-from django.conf.urls.static import static
+# from django.conf import settings
+from django.conf.urls import include, url
+# from django.conf.urls.static import static
 from django.contrib import admin
 
 # urlpatterns = patterns('',
@@ -11,17 +11,16 @@ from django.contrib import admin
 #     url(r'^admin/', include(admin.site.urls)),
 # )
 
-
-
 urlpatterns = [
     # url(r'^', include(router.urls)), # for rest-api
 
+    url(r'^$', 'newsletter.views.home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'newsletter.views.home', name='home'),
+    url(r'^newsletter$', 'newsletter.views.home', name='home'),
+    url(r'^contact/', 'newsletter.views.contact', name='contact'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^about/', 'bookstore.views.about', name='about'),
-    url(r'^contact/', 'newsletter.views.contact', name='contact'),
-    url(r'^library/', 'book_library.views.library', name="library"),
+    url(r'^library/', 'library.views.main', name='library'),
 ]
 
 # if settings.DEBUG:

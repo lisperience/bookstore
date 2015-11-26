@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+
+{% block head_title %}
+Welcome to Bookstore book rental service!
+{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block jumbotron %}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+      <input type="text" class="form-control" placeholder="Search for...">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+
+  <div class="col-lg-3 pull-right">
+    <p class="lead text-align-center">Add a book</p>
+    <form method="POST" action="{% url 'library' %}">
+      {% csrf_token %}
+      {{ form_book  | crispy }}
+      <input class="btn btn-primary btn-block" type="submit" value="Add"/>
+    </form>
+  </div>
+  <div class="col-lg-3 pull-right">
+    <p class="lead text-align-center">Add author</p>
+    <form method="POST" action="{% url 'library' %}">
+      {% csrf_token %}
+      {{ form_author  | crispy }}
+      <input class="btn btn-primary btn-block" type="submit" value="Add"/>
+    </form>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table">
+    {% for i in queryset %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.title }}</td>
+      <td>{{ i.authors }}</td>
+    </tr>
+    {% empty %}
+        Sorry there are no books in the library yet!
+    {% endfor %}
+  </table>
+
+</div>
+
+{% endblock %}

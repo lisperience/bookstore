@@ -5,7 +5,6 @@ from django.core.mail import send_mail
 from .forms import SignUpForm
 from .forms import ContactForm
 from .models import SignUp
-# Create your views here.
 
 
 def home(request):
