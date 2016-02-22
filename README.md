@@ -1,5 +1,6 @@
 Bookstore Project
 ============
+
 Bookstore project is a web application designed to help to catalog, maintain and lend books.
 
 Administrator of a bookstore can add/remove books, mark them as read, or rate them.
